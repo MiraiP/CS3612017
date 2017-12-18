@@ -54,7 +54,9 @@ public class TokenStream {
 			nextChar = readChar();
 			if (nextChar == '/') { // If / is followed by another /
 				// skip rest of line - it's a comment.
-				nextChar = readChar();
+				while(!isEndOfLine(nextChar)){
+					nextChar = readChar();
+				}
 				// look for <cr>, <lf>, <ff>
 
 			} else {
@@ -123,10 +125,10 @@ public class TokenStream {
 
 		// Then check for a separator.
 		if (isSeparator(nextChar)) {
+			//Complete
 			t.setType("Separator");
 			t.setValue(t.getValue() + nextChar);
 			nextChar = readChar();
-			// TO BE COMPLETED
 			return t;
 		}
 
